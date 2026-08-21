@@ -111,8 +111,8 @@
     .case-nav { flex-wrap: wrap !important; gap: 16px !important; padding: 28px 0 16px !important; }
 
     /* ABOUT */
-    section[data-screen-label="About"] { min-height: auto !important; padding: 92px 20px 48px !important; }
-    section[data-screen-label="About"] > div > div:first-child { padding-bottom: 28px !important; }
+    section[data-screen-label="About"] { min-height: auto !important; padding: 84px 20px 24px !important; }
+    section[data-screen-label="About"] > div > div:first-child { padding: 8px 0 32px !important; }
     section[data-screen-label="About"] a[href="#"] { margin-bottom: 24px !important; }
     section[data-screen-label="About"] p { font-size: 16px !important; }
     .about-row { flex-direction: column-reverse !important; gap: 24px !important; }
@@ -731,9 +731,9 @@
 
 <!-- ══ ABOUT ══ -->
 <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
-<section data-screen-label="About" style="min-height:88vh;display:flex;align-items:center;padding:112px 48px 40px;background:#ffffff;">
-  <div style="max-width:844px;margin:0 auto;width:100%;">
-    <div style="padding:0 0 48px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;text-align:left;">
+<section data-screen-label="About" style="padding:52px 48px 40px;background:#ffffff;">
+  <div style="max-width:1100px;margin:0 auto;width:100%;">
+    <div style="padding:72px 0 56px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;text-align:left;">
       <a href="#" onClick="{{ goHome }}" style="display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:500;color:#6B2FFA;text-decoration:none;margin-bottom:40px;"><span class="material-symbols-outlined" style="font-size:18px;">arrow_back</span>Home</a>
       <h1 style="font-size:clamp(36px,4.5vw,56px);font-weight:700;letter-spacing:-.02em;line-height:1.1;color:#1d1d1f;">About<span style="color:#6B2FFA;">.</span></h1>
     </div>
