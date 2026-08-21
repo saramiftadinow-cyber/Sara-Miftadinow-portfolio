@@ -29,7 +29,7 @@
   @keyframes mar { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
   /* ══ RESPONSIVE ══ */
-  #work-anchor, #contact-anchor { scroll-margin-top: 64px; }
+  #work-anchor { scroll-margin-top: 64px; }
   img { max-width: 100%; }
   html, body { overflow-x: hidden; }
 
@@ -146,7 +146,6 @@
   <div style="display:flex;align-items:center;gap:36px;">
     <a href="#" onClick="{{ goWork }}" style="{{ navWork }}" style-hover="color:#1d1d1f;">Work</a>
     <a href="#" onClick="{{ goAbout }}" style="{{ navAbout }}" style-hover="color:#1d1d1f;">About</a>
-    <a href="#" onClick="{{ goContact }}" style="{{ navContact }}" style-hover="color:#1d1d1f;">Contact</a>
   </div>
   <a href="mailto:saramiftadinow@gmail.com" style="font-size:13px;font-weight:500;background:#1d1d1f;color:#fff;padding:8px 18px;border-radius:980px;transition:background .2s;text-decoration:none;display:inline-block;" style-hover="background:#6B2FFA;color:#fff;">Hire me</a>
 </nav>
@@ -878,7 +877,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;bold&quot;,&quot;options&quot;:[&quot;bold&quot;,&quot;subtle&quot;,&quot;off&quot;],&quot;tsType&quot;:&quot;'bold'|'subtle'|'off'&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 class Component extends DCLogic {
-  state = { page: 'home', tab: 'work' };
+  state = { page: 'home' };
 
   renderVals() {
     const p = this.state.page;
@@ -886,7 +885,6 @@ class Component extends DCLogic {
     return {
       navWork: this.navStyle(tab === 'work'),
       navAbout: this.navStyle(tab === 'about'),
-      navContact: this.navStyle(tab === 'contact'),
       isHome: p === 'home',
       isTvsmart: p === 'tvsmart',
       isPracuj: p === 'pracuj',
@@ -904,15 +902,11 @@ class Component extends DCLogic {
       goHome: this.openPage('home'),
       goAbout: this.openPage('about'),
       goWork: (e) => { e.preventDefault(); this.setState({ tab: 'work' }); this.goHomeThen('work-anchor'); },
-      goContact: (e) => { e.preventDefault(); this.setState({ tab: 'contact' }); this.goHomeThen('contact-anchor'); },
     };
   }
 
   activeTab() {
-    const p = this.state.page;
-    if (p === 'about') return 'about';
-    if (p === 'home') return this.state.tab === 'contact' ? 'contact' : 'work';
-    return 'work';
+    return this.state.page === 'about' ? 'about' : 'work';
   }
 
   navStyle(active) {
@@ -923,7 +917,6 @@ class Component extends DCLogic {
   morphOpen(page) {
     return (e) => {
       if (e && e.preventDefault) e.preventDefault();
-      this.setState({ tab: 'work' });
       this.softTransition(page, () => {});
     };
   }
@@ -970,7 +963,6 @@ class Component extends DCLogic {
   openPage(page) {
     return (e) => {
       if (e && e.preventDefault) e.preventDefault();
-      this.setState({ tab: page === 'about' ? 'about' : 'work' });
       if (this.state.page === page) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
       this.softTransition(page, () => {});
     };
