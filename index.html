@@ -26,7 +26,6 @@
   @keyframes mar { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
   /* ══ RESPONSIVE ══ */
-  html { scroll-behavior: smooth; }
   #work-anchor, #contact-anchor { scroll-margin-top: 64px; }
   img { max-width: 100%; }
   html, body { overflow-x: hidden; }
@@ -919,8 +918,8 @@ class Component extends DCLogic {
     });
     setTimeout(() => {
       this.setState({ page });
-      window.scrollTo({ top: 0 });
-      setTimeout(() => { this.initMotion(); afterSwap(); }, 30);
+      this.jumpTop();
+      setTimeout(() => { this.jumpTop(); this.initMotion(); afterSwap(); }, 30);
       // Enter: content cascades in, each top-level block and its direct children stagger slightly, Apple product-page style
       let blocks = Array.from(document.querySelectorAll('x-dc > *')).filter(el => el.tagName !== 'NAV');
       // A case-study page is a single <section><div wrapper>...</div></section>; drill one level in so its top blocks (header, hero, case-study intro, info card) stagger individually
@@ -964,6 +963,16 @@ class Component extends DCLogic {
     }
   }
 
+  jumpTop() {
+    const root = document.documentElement;
+    const prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    if (root.scrollTop) root.scrollTop = 0;
+    if (document.body.scrollTop) document.body.scrollTop = 0;
+    root.style.scrollBehavior = prev;
+  }
+
   scrollToId(id, tries) {
     const el = document.getElementById(id);
     if (!el) {
@@ -977,6 +986,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     this.initMotion();
   }
 
